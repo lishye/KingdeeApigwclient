@@ -1,0 +1,14 @@
+D:\temp\Java\CSharpApiClient\bin\Debug\net9.0\CSharpApiClient.exe
+D:\temp\Java\CSharpApiClient\bin\Debug\net9.0\CSharpApiClient.deps.json
+D:\temp\Java\CSharpApiClient\bin\Debug\net9.0\CSharpApiClient.runtimeconfig.json
+D:\temp\Java\CSharpApiClient\bin\Debug\net9.0\CSharpApiClient.dll
+D:\temp\Java\CSharpApiClient\bin\Debug\net9.0\CSharpApiClient.pdb
+D:\temp\Java\CSharpApiClient\obj\Debug\net9.0\CSharpApiClient.GeneratedMSBuildEditorConfig.editorconfig
+D:\temp\Java\CSharpApiClient\obj\Debug\net9.0\CSharpApiClient.AssemblyInfoInputs.cache
+D:\temp\Java\CSharpApiClient\obj\Debug\net9.0\CSharpApiClient.AssemblyInfo.cs
+D:\temp\Java\CSharpApiClient\obj\Debug\net9.0\CSharpApiClient.csproj.CoreCompileInputs.cache
+D:\temp\Java\CSharpApiClient\obj\Debug\net9.0\CSharpApiClient.dll
+D:\temp\Java\CSharpApiClient\obj\Debug\net9.0\refint\CSharpApiClient.dll
+D:\temp\Java\CSharpApiClient\obj\Debug\net9.0\CSharpApiClient.pdb
+D:\temp\Java\CSharpApiClient\obj\Debug\net9.0\CSharpApiClient.genruntimeconfig.cache
+D:\temp\Java\CSharpApiClient\obj\Debug\net9.0\ref\CSharpApiClient.dll

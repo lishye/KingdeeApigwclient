@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "TestApp",
+            "request": "launch",
+            "mainClass": "TestApp",
+            "projectName": "Java_1334a144",
+            "classPaths": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/apigwclient-0.1.5.jar"
+            ],
+            "vmArgs": "--add-exports java.base/sun.security.action=ALL-UNNAMED"
+        }
+    ]
+}

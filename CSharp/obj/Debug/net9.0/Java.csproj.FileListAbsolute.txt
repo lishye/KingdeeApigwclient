@@ -1,0 +1,14 @@
+D:\temp\Java\bin\Debug\net9.0\Java.exe
+D:\temp\Java\bin\Debug\net9.0\Java.deps.json
+D:\temp\Java\bin\Debug\net9.0\Java.runtimeconfig.json
+D:\temp\Java\bin\Debug\net9.0\Java.dll
+D:\temp\Java\bin\Debug\net9.0\Java.pdb
+D:\temp\Java\obj\Debug\net9.0\Java.GeneratedMSBuildEditorConfig.editorconfig
+D:\temp\Java\obj\Debug\net9.0\Java.AssemblyInfoInputs.cache
+D:\temp\Java\obj\Debug\net9.0\Java.AssemblyInfo.cs
+D:\temp\Java\obj\Debug\net9.0\ApigwClient.csproj.CoreCompileInputs.cache
+D:\temp\Java\obj\Debug\net9.0\Java.dll
+D:\temp\Java\obj\Debug\net9.0\refint\Java.dll
+D:\temp\Java\obj\Debug\net9.0\Java.pdb
+D:\temp\Java\obj\Debug\net9.0\Java.genruntimeconfig.cache
+D:\temp\Java\obj\Debug\net9.0\ref\Java.dll
