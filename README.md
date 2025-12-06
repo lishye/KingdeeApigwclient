@@ -450,7 +450,7 @@ X-Api-Signature: ...
 
 ## 📄 许可证
 
-内部使用
+本项目基于 MIT License 开源，详见 `LICENSE` 文件。
 
 ## 👨‍💻 支持
 
