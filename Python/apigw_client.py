@@ -301,24 +301,24 @@ class SignatureUtil:
         return hmac_obj.hexdigest()
 
 
-def main():
-    """测试主函数"""
+def test_kingdee_auth_token(client_id:str, client_secret:str):
+    """测试主函数 - 测试获取授权令牌"""
     print("开始调用API网关接口...")
-    
+
     try:
         # 1. 创建配置
         config = ApigwConfig()
-        config.client_id = "328301"
-        config.client_secret = "1a97dac4f8c92a482424bf7732b115a1"
-        print("已设置client_id: 328301")
+        config.client_id = client_id
+        config.client_secret = client_secret
+        print(f"已设置client_id: {client_id}")
         print("已设置client_secret")
-        
+
         # 2. 初始化客户端
         apigw_client = ApigwClient.get_instance()
         apigw_client.init(config)
         print("已获取ApigwClient实例")
         print("已初始化API网关客户端")
-        
+
         # 3. 创建请求
         request = ApiRequest(
             HttpMethod.GET,
@@ -326,27 +326,27 @@ def main():
             "/jdyconnector/app_management/kingdee_auth_token"
         )
         print("已创建ApiRequest对象")
-        
+
         # 4. 设置查询参数
         print("准备设置app_key参数...")
-        
+
         # 生成签名
         app_key = "yJKZ3QLA"
-        app_secret = "2fb248033d37a62bc7c8525e7757d57e106c6e4c"
-        
+        app_secret = "a36777d74db08668cd00f4c8d3205a884db716fe"
+
         # 验证算法
         print("=== 验证签名算法 ===")
         test_signature = SignatureUtil.generate_signature("abc", "abc123")
         print(f"测试签名 (app_key=abc, appSecret=abc123): {test_signature}")
         print("预期结果: ZDljMTI3NGIyNTE1MTRkYzlkNjc1MDNhYjUzMzgzNWMyY2M4YTdjMzdmNmM3YTVlNDkxMTkzNjdiOTFjNzUyZQ==")
         print(f"验证结果: {'通过' if test_signature == 'ZDljMTI3NGIyNTE1MTRkYzlkNjc1MDNhYjUzMzgzNWMyY2M4YTdjMzdmNmM3YTVlNDkxMTkzNjdiOTFjNzUyZQ==' else '失败'}")
-        
+
         # 生成实际签名
         app_signature = SignatureUtil.generate_signature(app_key, app_secret)
         print("=== 实际签名 ===")
         print(f"app_key: {app_key}")
         print(f"app_signature: {app_signature}")
-        
+
         querys = {
             "app_key": app_key,
             "app_signature": app_signature
@@ -355,17 +355,88 @@ def main():
         print(f"已设置app_key: {app_key}")
         print("已设置app_signature")
         print("已设置查询参数")
-        
+
         # 5. 设置请求体
         request.set_body_json(b"{}")
         print("已设置请求体，准备发送请求...")
-        
+
         # 6. 发送请求
         result = apigw_client.send(request)
         print("请求发送成功!")
         print(f"响应状态码: {result.http_code}")
         print(f"响应内容: {result.body}")
+
+    except Exception as e:
+        print("====== 异常详细信息 ======")
+        print(f"异常类型: {type(e).__name__}")
+        print(f"异常消息: {str(e)}")
+        print("====== 堆栈跟踪 ======")
+        import traceback
+        traceback.print_exc()
+
+
+def test_push_app_authorize(client_id:str, client_secret:str, outer_instance_id:str):
+    """测试push_app_authorize接口 - 推送应用授权（API网关签名方式）"""
+    print("\n\n" + "="*60)
+    print("开始测试 push_app_authorize 接口...")
+    print("="*60)
+
+    try:
+        # 1. 创建配置
+        config = ApigwConfig()
+        config.client_id = client_id
+        config.client_secret = client_secret
+        print(f"已设置client_id: {client_id}")
+        print("已设置client_secret")
+
+        # 2. 初始化客户端
+        apigw_client = ApigwClient.get_instance()
+        apigw_client.init(config)
+        print("已获取ApigwClient实例")
+        print("已初始化API网关客户端")
+
+        # 3. 创建请求
+        request = ApiRequest(
+            HttpMethod.POST,
+            "api.kingdee.com",
+            "/jdyconnector/app_management/push_app_authorize"
+        )
+        print("已创建ApiRequest对象，路径: /jdyconnector/app_management/push_app_authorize")
+
+        # 4. 设置查询参数（仅 outerInstanceId，不包含 app_key 和 app_signature）
+        print("准备设置查询参数...")
+
+        querys = {
+            "outerInstanceId": outer_instance_id
+        }
+        request.set_querys(querys)
+        print(f"已设置outerInstanceId: {outer_instance_id}")
+        print("（注：app_key 和 app_signature 不通过 URL 参数传递）")
+
+        # 5. 设置请求体
+        request.set_body_json(b"{}")
+        print("已设置请求体为空JSON")
+
+        # 6. 发送请求（ApigwClient 会自动生成 API 网关签名并放在请求头中）
+        print("\n准备发送请求，系统会自动生成签名...")
+        print("请求头将包含:")
+        print("  - X-Api-ClientID: 328301")
+        print("  - X-Api-Auth-Version: 2.0")
+        print("  - X-Api-TimeStamp: (当前时间戳)")
+        print("  - X-Api-Nonce: (随机数)")
+        print("  - X-Api-SignHeaders: X-Api-TimeStamp,X-Api-Nonce")
+        print("  - X-Api-Signature: (HMAC-SHA256签名，基于上述头)")
+        print("  - Content-Type: application/json;charset=utf-8")
         
+        result = apigw_client.send(request)
+        print("\n✓ 请求发送成功!")
+        print(f"响应状态码: {result.http_code}")
+        
+        if result.http_code == 200:
+            print(f"✓ 响应内容: {result.body[:200]}...")
+        else:
+            print(f"✗ 响应内容: {result.body}")
+
     except Exception as e:
         print("====== 异常详细信息 ======")
         print(f"异常类型: {type(e).__name__}")
@@ -376,4 +447,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # 运行测试函数
+    clientid = "xxxxxx"
+    clientidsecret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    outerinstanceid = "xxxxx"
+    test_kingdee_auth_token(clientid, clientidsecret)
+    test_push_app_authorize(clientid, clientidsecret, outerinstanceid)
